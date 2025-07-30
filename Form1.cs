@@ -185,7 +185,7 @@ namespace KerningAdjuster
         private void button2_Click(object sender, EventArgs e)
         {
             SaveFileDialog SF = new SaveFileDialog();
-            SF.FileName = "font.font_widths";
+            SF.FileName = "newfont.width_table";
 
             if (SF.ShowDialog() == DialogResult.OK)
             {
