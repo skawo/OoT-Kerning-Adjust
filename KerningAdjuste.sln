@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.34931.43
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KerningAdjuster", "KerningAdjuster.csproj", "{7386CEB7-78B7-42ED-965B-2854E536E328}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7386CEB7-78B7-42ED-965B-2854E536E328}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7386CEB7-78B7-42ED-965B-2854E536E328}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7386CEB7-78B7-42ED-965B-2854E536E328}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7386CEB7-78B7-42ED-965B-2854E536E328}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {93F46881-0A41-41C4-B959-BA3879739D04}
+	EndGlobalSection
+EndGlobal
