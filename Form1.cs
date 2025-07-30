@@ -86,9 +86,12 @@ namespace KerningAdjuster
                 return;
             }
 
+            textBox1.TextChanged -= textBox1_TextChanged;
+
             FillData();
+            NewPreview(textBox1.Text);
 
-
+            textBox1.TextChanged += textBox1_TextChanged;
         }
 
         private void FillData()
@@ -103,9 +106,6 @@ namespace KerningAdjuster
             }
 
             textBox1.Text = codepoint[0].Replace("\\n", Environment.NewLine);
-
-
-
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
