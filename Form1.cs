@@ -34,10 +34,24 @@ namespace KerningAdjuster
                     byte[] widths = File.ReadAllBytes(OF.FileName);
                     fontWidths = new List<float>();
 
-                    for (int i = 0; i < widths.Length; i += 4)
+                    if (sender == null)
                     {
-                        byte[] width = widths.Skip(i).Take(4).Reverse().ToArray();
-                        fontWidths.Add(BitConverter.ToSingle(width, 0));
+                        for (int i = 0; i < widths.Length; i++)
+                        {
+                            byte b1 = (byte)((widths[i] >> 4) & 0xF);
+                            byte b2 = (byte)(widths[i] & 0xF);
+
+                            fontWidths.Add((float)b1);
+                            fontWidths.Add((float)b2);
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < widths.Length; i += 4)
+                        {
+                            byte[] width = widths.Skip(i).Take(4).Reverse().ToArray();
+                            fontWidths.Add(BitConverter.ToSingle(width, 0));
+                        }
                     }
                 }
                 else
@@ -60,7 +74,9 @@ namespace KerningAdjuster
 
                 }
                 else
-                    return;
+                {
+                    font = Resource1.eng;
+                }
             }
             catch (Exception ex)
             {
@@ -78,7 +94,9 @@ namespace KerningAdjuster
                     codepoint = File.ReadAllLines(OF.FileName).ToList();
                 }
                 else
-                    return;
+                {
+                    codepoint = Resource1.codep.Split(Environment.NewLine.ToCharArray()).ToList();
+                }
             }
             catch (Exception ex)
             {
@@ -208,6 +226,58 @@ namespace KerningAdjuster
                     return;
                 }
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog SF = new SaveFileDialog();
+            SF.FileName = "newfont.width_table";
+
+            if (SF.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    List<byte> allBytes = new List<byte>();
+
+                    byte curByte = 0;
+                    bool shift = true;
+
+                    foreach (float width in fontWidths)
+                    {
+                        if (width > 15)
+                            throw new Exception("Widths cannot be over 15");
+
+                        byte w = (byte)width;
+
+                        if (shift == true)
+                            curByte = 0;
+
+                        if (shift == true)
+                        {
+                            curByte |= (byte)(w << 4);
+                            shift = false;
+                        }
+                        else
+                        {
+                            curByte |= w;
+                            allBytes.Add(curByte);
+                            shift = true;
+                        }
+                    }
+
+                    File.WriteAllBytes(SF.FileName, allBytes.ToArray());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: ", ex.Message);
+                    return;
+                }
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            button1_Click(null, null);
         }
     }
 }
